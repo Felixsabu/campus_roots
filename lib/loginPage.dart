@@ -11,7 +11,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
   String? userType;
-  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -141,10 +141,10 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                         ),
                         const SizedBox(height: 16.0),
                         TextFormField(
-                          controller: _emailController,
-                          keyboardType: TextInputType.emailAddress,
+                          controller: _usernameController,  // Assuming you have a separate controller for the username
+                          keyboardType: TextInputType.text,  // Set to text since it's a username
                           decoration: InputDecoration(
-                            labelText: 'Email ID',
+                            labelText: 'Username',
                             labelStyle: GoogleFonts.montserrat(color: Colors.grey[700]), // Dark Gray Text
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12.0),
@@ -156,15 +156,9 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                             filled: true,
                             fillColor: Colors.white, // White Background
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your email';
-                            } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                              return 'Please enter a valid email';
-                            }
-                            return null;
-                          },
+                          // No validator
                         ),
+
                         const SizedBox(height: 16.0),
                         TextFormField(
                           controller: _passwordController,
@@ -222,7 +216,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => CampusRootsApp(),
+                                builder: (context) => CampusRootsApp(name:_usernameController.text),
                                 maintainState: true,
                               ),
                             );

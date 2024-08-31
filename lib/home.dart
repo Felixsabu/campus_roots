@@ -7,11 +7,13 @@ import 'fund.dart';
 import 'disc.dart';
 import 'directory.dart';
 
-void main() {
-  runApp(CampusRootsApp());
-}
+
 
 class CampusRootsApp extends StatelessWidget {
+  final String name;
+
+  const CampusRootsApp({super.key, required this.name});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -49,12 +51,15 @@ class CampusRootsApp extends StatelessWidget {
           ),
         ),
       ),
-      home: HomePage(),
+      home: HomePage(alumniName: '$name',),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
+  final String alumniName;
+
+  const HomePage({super.key, required this.alumniName});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,7 +169,7 @@ class HomePage extends StatelessWidget {
             _buildOptionTile(
               context,
               icon: Icons.format_align_justify_sharp,
-              title: 'Forms',
+              title: 'Forums',
               color: Color(0xFFBDFCC9), // Mint Green
               onTap: () {
                 Navigator.push(
@@ -196,7 +201,7 @@ class HomePage extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          'Welcome to Campus Roots',
+          'Welcome $alumniName',
           style: Theme.of(context).textTheme.headlineLarge,
           textAlign: TextAlign.center,
         ),

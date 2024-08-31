@@ -61,6 +61,7 @@ class SoftwareCompaniesPage extends StatelessWidget {
     ];
 
     return Scaffold(
+
       appBar: AppBar(
         title: const Text('Software Companies'),
         foregroundColor: Colors.black,
@@ -224,7 +225,7 @@ class CompanyDetailsPage extends StatelessWidget {
                             ),
                           );
                         },
-                        child: const Text('Free Chat'),
+                        child: const Text('Chat'),
                       ),
                     ],
                   ),

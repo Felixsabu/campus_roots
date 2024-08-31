@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color(0xFF800020), // Burgundy
         hintColor: const Color(0xFFB8860B), // Deep Mustard (Dark Gold)

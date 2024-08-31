@@ -6,7 +6,6 @@ class FreelancingRequestsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final requests = [
-      // Replace this with your actual request data
       {
         'title': 'Web Development Project',
         'description': 'Need a skilled web developer to build a responsive e-commerce website.',
@@ -49,7 +48,6 @@ class FreelancingRequestsPage extends StatelessWidget {
         'budget': '₹70,000',
         'deadline': 'April 30, 2025',
       },
-      // Add more requests here
     ];
 
     return Scaffold(
@@ -70,26 +68,31 @@ class FreelancingRequestsPage extends StatelessWidget {
           itemBuilder: (context, index) {
             final request = requests[index];
             return Card(
-              child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RequestDetailsPage(request: request),
+              margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              child: Stack(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RequestDetailsPage(request: request),
+                        ),
+                      );
+                    },
+                    child: ListTile(
+                      title: Text(request['title']!, style: TextStyle(color: Colors.blue)),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(request['description']!),
+                          Text('Budget: ${request['budget']}'),
+                          Text('Deadline: ${request['deadline']}'),
+                        ],
+                      ),
                     ),
-                  );
-                },
-                child: ListTile(
-                  title: Text(request['title']!,style: TextStyle(color: Colors.blue),),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(request['description']!),
-                      Text('Budget: ${request['budget']}'),
-                      Text('Deadline: ${request['deadline']}'),
-                    ],
                   ),
-                ),
+                ],
               ),
             );
           },
@@ -113,16 +116,62 @@ class RequestDetailsPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            Text(request['title'], style: const TextStyle(fontSize: 20,color: Colors.blue)),
-            const SizedBox(height: 16),
-            Text(request['description']),
-            const SizedBox(height: 16),
-            Text('Budget: ${request['budget']}'),
-            const SizedBox(height: 16),
-            Text('Deadline: ${request['deadline']}'),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(request['title'], style: const TextStyle(fontSize: 20, color: Colors.blue)),
+                const SizedBox(height: 16),
+                Text(request['description']),
+                const SizedBox(height: 16),
+                Text('Budget: ${request['budget']}'),
+                const SizedBox(height: 16),
+                Text('Deadline: ${request['deadline']}'),
+              ],
+            ),
+            Positioned(
+              bottom: 16,
+              right: 16,
+              child: ElevatedButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Apply'),
+                      content: Text('Are you sure you want to apply for "${request['title']}"?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            // Handle the application action here
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Applied for "${request['title']}" successfully!'),
+                              ),
+                            );
+                          },
+                          child: const Text('Apply'),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                child: const Text('Apply'),
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white, backgroundColor: Colors.green, padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

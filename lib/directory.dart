@@ -46,21 +46,21 @@ class AlumniDirectoryPage extends StatefulWidget {
 
 class _AlumniDirectoryPageState extends State<AlumniDirectoryPage> {
   String? selectedFilter;
-  final List<String> filters = ['All', 'CS', 'EC', 'EEE','ME','CE'];
+  final List<String> filters = ['All', 'CS', 'EC', 'EEE', 'ME', 'CE'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Alumni Directory'),
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back), // Back arrow icon
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CampusRootsApp(),
+                builder: (context) => CampusRootsApp(name: ''),
                 maintainState: true,
               ),
             ); // Navigate back to the previous page

@@ -48,7 +48,7 @@ class TopicSelectionScreen extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CampusRootsApp(),
+                builder: (context) => CampusRootsApp(name:''),
                 maintainState: true,
               ),
             ); // Navigate back to the previous page
